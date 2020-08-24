@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import { v4 as uuidv4 } from 'uuid';
 // const { v4: uuidv4 } = require('uuid');
 import classNames from 'classnames';
+import { NoteContext } from '../contexts/Note.context';
 
 class AddNote extends Component{
+    static contextType = NoteContext;
     state = {
         id: uuidv4(),
         title: '',
@@ -21,7 +23,7 @@ class AddNote extends Component{
             this.setState({
                 errors: {
                     ...this.state.errors,
-                    title: 'plz provide title'
+                    title: 'please provide title'
                 }
             });
             return;
@@ -31,12 +33,13 @@ class AddNote extends Component{
                 errors: {
                     ...this.state.errors,
                     title: '',
-                    description: 'plz provide description'
+                    description: 'please provide description'
                 }
             });
             return;
         }
-        this.props.addNote(this.state);
+        this.context.addNote(this.state);
+        this.props.history.push('/');
         this.setState({
             id: '',
             title: '',
