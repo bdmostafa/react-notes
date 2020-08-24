@@ -37,6 +37,7 @@ class App extends Component {
         });
     };
     removeNote = id => {
+        console.log(id)
         this.setState({
             notes: this.state.notes.filter(note => note.id !== id)
         });
