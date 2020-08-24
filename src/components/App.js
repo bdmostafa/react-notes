@@ -3,6 +3,10 @@ import Header from './Header';
 import Footer from './Footer';
 import Notes from './Notes';
 import AddNote from './AddNote';
+import { Route, Switch } from 'react-router-dom';
+import About from './About';
+import NotFound from './NotFound';
+import Help from './Help';
 
 // class based component
 class App extends Component {
@@ -32,14 +36,33 @@ class App extends Component {
             notes: [...this.state.notes, note]
         });
     };
+    removeNote = id => {
+        this.setState({
+            notes: this.state.notes.filter(note => note.id !== id)
+        });
+    };
         render(){
             return(
                 <div className="container">
                     <Header />
-                    <Notes notes={this.state.notes} />
-                    <br />
-                    <br />
-                    <AddNote addNote={this.addNote}/>
+                    <Switch>
+                        <Route
+                            path='/'
+                            exact
+                            render={ () => (
+                            <Notes notes={this.state.notes} removeNote={this.removeNote}/>
+                            )}
+                        />
+                        <Route
+                            path='/add'
+                            render={ ()=> (
+                            <AddNote addNote={this.addNote}/>
+                            )} 
+                        />
+                        <Route path='/about' component={About} />
+                        <Route path='/help' component={Help} />
+                        <Route component={NotFound} />
+                    </Switch>
                     <Footer />
                 </div>
                 

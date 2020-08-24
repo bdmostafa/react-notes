@@ -51,21 +51,24 @@ class AddNote extends Component{
     //   };
     render(){
         return(
-            <form onSubmit={this.handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="title">Title</label>
-                    {/* <input type="text" name="title" className="form-control is-invalid" id="title" value={this.state.title} onChange={this.handleChange}/> */}
-                    <input type="text" name="title" className={classNames('form-control', !!this.state.errors.title && 'is-invalid')} id="title" value={this.state.title} onChange={this.handleChange}/>
-                    <div className="invalid-feedback">Title must be required</div>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="description">Description</label>
-                    {/* <textarea id="description" name="description" value={this.state.description} className="form-control" onChange={this.handleChange}/> */}
-                    <textarea id="description" name="description" value={this.state.description} className={classNames('form-control', !!this.state.errors.description && 'is-invalid')} onChange={this.handleChange}/>
-                    <div className="invalid-feedback">Description must be required</div>
-                </div>
-                <button className="btn btn-primary" type="submit">Submit</button>
-            </form>
+            <>
+                <h3>Add Note</h3>
+                <form onSubmit={this.handleSubmit}>
+                    <div className="form-group">
+                        <label htmlFor="title">Title</label>
+                        {/* <input type="text" name="title" className="form-control is-invalid" id="title" value={this.state.title} onChange={this.handleChange}/> */}
+                        <input type="text" name="title" className={classNames('form-control', !!this.state.errors.title && 'is-invalid')} id="title" value={this.state.title} onChange={this.handleChange}/>
+                        <div className="invalid-feedback">Title must be required</div>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="description">Description</label>
+                        {/* <textarea id="description" name="description" value={this.state.description} className="form-control" onChange={this.handleChange}/> */}
+                        <textarea id="description" name="description" value={this.state.description} className={classNames('form-control', !!this.state.errors.description && 'is-invalid')} onChange={this.handleChange}/>
+                        <div className="invalid-feedback">Description must be required</div>
+                    </div>
+                    <button className="btn btn-primary" type="submit">Submit</button>
+                </form>
+            </>
         )
     }
 }
