@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 // const { v4: uuidv4 } = require('uuid');
 import classNames from 'classnames';
 import { NoteContext } from '../contexts/Note.context';
+import Axios from 'axios';
 
 class AddNote extends Component{
     static contextType = NoteContext;
@@ -17,7 +18,7 @@ class AddNote extends Component{
             [e.target.name]: e.target.value
         });
     };
-    handleSubmit = e => {
+    handleSubmit = async e => {
         e.preventDefault();
         if(this.state.title === ''){
             this.setState({
@@ -38,14 +39,29 @@ class AddNote extends Component{
             });
             return;
         }
-        this.context.addNote(this.state);
-        this.props.history.push('/');
-        this.setState({
-            id: '',
-            title: '',
-            description: '',
-            errors: {}
-        });
+        try{
+            const res = await Axios.post('https://jsonplaceholder.typicode.com/comments', {
+                name: this.state.title,
+                body: this.state.description,
+            })
+            // console.log(res);
+            const {data} = res;
+            // this.context.addNote(this.state);
+            this.context.addNote(data);
+            this.props.history.push('/');
+            
+        } catch (e) {
+            console.log(e);
+        }
+       
+       
+
+        // this.setState({
+        //     id: '',
+        //     title: '',
+        //     description: '',
+        //     errors: {}
+        // });
     };
     // handleDescriptionChange = e => {
     //     this.setState({

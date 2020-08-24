@@ -1,5 +1,5 @@
 import React, { Component, createContext } from 'react';
-
+import axios from 'axios';
 
 export class NoteProvider extends Component {
     state = {
@@ -21,13 +21,27 @@ export class NoteProvider extends Component {
             }
         ]
     };
+    // Life Cycle method
+    async componentDidMount(){
+        try {
+            const res = await axios
+            .get('https://jsonplaceholder.typicode.com/comments');
+            const {data} = res;
+            this.setState({
+                notes: data
+            })
+        } catch (e){
+            console.log(e);
+        }
+        
+    }
     addNote = note => {
         this.setState({
             notes: [...this.state.notes, note]
         });
     };
     removeNote = id => {
-        console.log(id)
+        // console.log(id);
         this.setState({
             notes: this.state.notes.filter(note => note.id !== id)
         });
@@ -45,7 +59,5 @@ export class NoteProvider extends Component {
         )
     }
 }
-
-
 
 export const NoteContext = createContext();

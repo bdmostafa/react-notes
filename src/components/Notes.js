@@ -18,8 +18,12 @@ import { NoteContext } from '../contexts/Note.context';
 // Using context API through class based component
 class Notes extends Component {
     static contextType = NoteContext;
+    componentDidMount(){
+       // Third party API can be used here
+
+    }
     render() {
-        console.log(this.context);
+        // console.log(this.context);
         const {notes} = this.context;
         return (
             <div>

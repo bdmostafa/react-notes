@@ -49,8 +49,8 @@ class App extends Component {
             return(
                 <div className="container">
                     <Header />
-                    <Switch>
                         <NoteProvider>
+                            <Switch>
                             <Route
                                 path='/'
                                 exact
@@ -63,8 +63,8 @@ class App extends Component {
                             <Route path='/about' component={About} />
                             <Route path='/help' component={Help} />
                             <Route component={NotFound} />
+                            </Switch>
                         </NoteProvider>
-                    </Switch>
                     <Footer />
                 </div>
                 
