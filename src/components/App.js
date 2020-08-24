@@ -26,13 +26,20 @@ class App extends Component {
                 description: 'Notes 3 description'
             }
         ]
-    }
+    };
+    addNote = note => {
+        this.setState({
+            notes: [...this.state.notes, note]
+        });
+    };
         render(){
             return(
                 <div className="container">
                     <Header />
                     <Notes notes={this.state.notes} />
-                    <AddNote />
+                    <br />
+                    <br />
+                    <AddNote addNote={this.addNote}/>
                     <Footer />
                 </div>
                 
