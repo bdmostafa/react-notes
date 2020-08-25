@@ -12,10 +12,10 @@ const AddNote = props => {
             id: uuidv4(),
             title: '',
             description: '',
-            errors: {}
     });
-
-
+    // Declare error part individually
+    const [errors, setErrors] = useState({});
+    
     const handleChange = e => {
         setNote({
             // Existing note like id, errors
@@ -26,22 +26,16 @@ const AddNote = props => {
     const handleSubmit = async e => {
         e.preventDefault();
         if(note.title === ''){
-            setNote({
-                ...note,
-                errors: {
-                    ...note.errors,
-                    title: 'please provide title'
-                }
+            setErrors({
+                ...errors,
+                title: 'please provide title'
             });
             return;
         }
         if (note.description === ''){
-            setNote({
-                errors: {
-                    ...note.errors,
-                    title: '',
-                    description: 'please provide description'
-                }
+            setErrors({
+                ...errors,
+                description: 'please provide description'
             });
             return;
         }
@@ -66,12 +60,31 @@ const AddNote = props => {
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="title">Title</label>
-                    <input type="text" name="title" className={classNames('form-control', !!note.errors.title && 'is-invalid')} id="title" value={note.title} onChange={handleChange}/>
+                    <input
+                        type="text"
+                        name="title"
+                        className={classNames(
+                            'form-control',
+                            !!errors.title && 'is-invalid'
+                        )}
+                        id="title"
+                        value={note.title}
+                        onChange={handleChange}
+                    />
                     <div className="invalid-feedback">Title must be required</div>
                 </div>
                 <div className="form-group">
                     <label htmlFor="description">Description</label>
-                    <textarea id="description" name="description" value={note.description} className={classNames('form-control', !!note.errors.description && 'is-invalid')} onChange={handleChange}/>
+                    <textarea
+                        id="description"
+                        name="description"
+                        value={note.description}
+                        className={classNames(
+                            'form-control',
+                            !!errors.description && 'is-invalid'
+                        )}
+                        onChange={handleChange}
+                    />
                     <div className="invalid-feedback">Description must be required</div>
                 </div>
                 <button className="btn btn-primary" type="submit">Submit</button>
