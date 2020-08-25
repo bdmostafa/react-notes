@@ -49,13 +49,10 @@ class AddNote extends Component{
             // this.context.addNote(this.state);
             this.context.addNote(data);
             this.props.history.push('/');
-            
+
         } catch (e) {
             console.log(e);
         }
-       
-       
-
         // this.setState({
         //     id: '',
         //     title: '',
